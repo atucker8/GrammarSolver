@@ -3,7 +3,7 @@ import java.io.*;
 public class GrammarSolver {
 private Map<String,String> rulesMap;
 //fix iterator(change to values)
-private Iterator<Iterator> it=rulesMap.keySet().iterator();
+private Iterator<Iterator> it=rulesMap.iterator();
 
 public GrammarSolver(List<String> rules){
 if(rules.isEmpty()){
@@ -17,17 +17,19 @@ String[]ruleLine=line.split("::=");
 rulesMap.put(ruleLine[0],ruleLine[1]);
 }
 }
- 
+
+
 public boolean grammarContains(String symbol){
 return(rulesMap.containsKey(symbol));
 }
+
 //symbols are values
 public String getSymbols(){
     String symbols="[";
     while(it.hasNext()){
         symbols+=it.next()+",";
     }
-    symbols.substring(symbols.length)
+    symbols.substring(symbols.length());
     return "";
 }
 
