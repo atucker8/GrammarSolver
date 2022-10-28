@@ -2,9 +2,9 @@ import java.util.*;
 import java.io.*;
 public class GrammarSolver {
 private Map<String,String> rulesMap;
-//fix iterator(change to values)
-private Iterator<Iterator> it=rulesMap.iterator();
+private Set<String> vals;
 
+//constructor that splits rules into non-terminal and termnals and put them into a map
 public GrammarSolver(List<String> rules){
 if(rules.isEmpty()){
     throw new IllegalArgumentException();
@@ -14,20 +14,22 @@ String line="";
 for(int i=0;i<rules.size();i++){
 line=rules.get(i);
 String[]ruleLine=line.split("::=");
+ruleLine=line.split("|");
+ruleLine=line.split(" ");
 rulesMap.put(ruleLine[0],ruleLine[1]);
 }
+vals=rulesMap.keySet();
 }
-
-
+//checks if the map of grammar has a specific non terminal
 public boolean grammarContains(String symbol){
 return(rulesMap.containsKey(symbol));
 }
 
-//symbols are values
+//returns all of the non terminal symvbols
 public String getSymbols(){
     String symbols="[";
-    while(it.hasNext()){
-        symbols+=it.next()+",";
+    for(String s: vals){
+        symbols+=s+",";
     }
     symbols.substring(symbols.length());
     return "";
