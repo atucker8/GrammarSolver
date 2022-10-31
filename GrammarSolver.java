@@ -1,5 +1,4 @@
 import java.util.*;
-import java.io.*;
 public class GrammarSolver {
 private Map<String,String> rulesMap;
 private Set<String> vals;
@@ -14,8 +13,6 @@ String line="";
 for(int i=0;i<rules.size();i++){
 line=rules.get(i);
 String[]ruleLine=line.split("::=");
-ruleLine=line.split("|");
-ruleLine=line.split(" ");
 rulesMap.put(ruleLine[0],ruleLine[1]);
 }
 vals=rulesMap.keySet();
@@ -25,16 +22,18 @@ public boolean grammarContains(String symbol){
 return(rulesMap.containsKey(symbol));
 }
 
+
 //returns all of the non terminal symvbols
 public String getSymbols(){
     String symbols="[";
     for(String s: vals){
-        symbols+=s+",";
+        symbols+=rulesMap.get(s)+", ";
     }
     symbols.substring(symbols.length());
-    return "";
+    return symbols;
 }
 
+//start with adj non terminal
 //public String[] generate(String symbol, int times){
 
 //}
