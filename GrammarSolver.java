@@ -49,16 +49,16 @@ private String genHelp(String symbol){
 String line=rulesMap.get(symbol);
 if(line!=null){
     String[]pieces=line.split("\\|");
-    if(pieces!=null){
+    if(pieces.length>1){
         Random random=new Random();
         int rand=random.nextInt(pieces.length); 
-        symbol=genHelp(pieces[rand]);
+        return genHelp(pieces[rand]);
     }
     pieces=line.split("\\s+");
-    if(pieces!=null){
+    if(pieces.length>1){
         Random random=new Random();
         int rand=random.nextInt(pieces.length);
-        returngenHelp(pieces[rand]);
+        return genHelp(pieces[rand]);
     }
 }
 return symbol.trim();
