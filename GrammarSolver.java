@@ -23,7 +23,7 @@ return(rulesMap.containsKey(symbol));
 }
 
 
-//returns all of the non terminal symvbols
+//returns all of the non terminal symbols
 public String getSymbols(){
     String symbols="[";
     for(String s: keys){
@@ -33,7 +33,7 @@ public String getSymbols(){
     return symbols;
 }
 
-//start with adj non terminal
+//returns times instances of the requested symbol
 public String[] generate(String symbol, int times){
 String [] s=new String[times];
     if(times<0||!rulesMap.containsKey(symbol)){
@@ -44,7 +44,7 @@ for(int i=0;i<times;i++){
 }
 return s;
 }
-
+//helper method for generate method by returning 1 instance of given symbol
 private String genHelp(String symbol){
 String line=rulesMap.get(symbol);
 if(line!=null){
