@@ -48,20 +48,20 @@ return s;
 private String genHelp(String symbol){
 String line=rulesMap.get(symbol);
 if(line!=null){
-    String[]pieces=line.split("|");
+    String[]pieces=line.split("\\|");
     if(pieces!=null){
         Random random=new Random();
-        int rand=random.nextInt(pieces.length);
-        return genHelp(pieces[rand]);
+        int rand=random.nextInt(pieces.length); 
+        symbol=genHelp(pieces[rand]);
     }
     pieces=line.split("\\s+");
     if(pieces!=null){
         Random random=new Random();
         int rand=random.nextInt(pieces.length);
-        return genHelp(pieces[rand]);
+        returngenHelp(pieces[rand]);
     }
 }
-return symbol;
+return symbol.trim();
 }
 
 }
