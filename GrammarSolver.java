@@ -47,21 +47,35 @@ return s;
 //helper method for generate method by returning 1 instance of given symbol
 private String genHelp(String symbol){
 String line=rulesMap.get(symbol);
+String pieces[];
+String words="";
 if(line!=null){
-    String[]pieces=line.split("\\|");
+    pieces=line.split("\\|");
     if(pieces.length>1){
         Random random=new Random();
         int rand=random.nextInt(pieces.length); 
-        return genHelp(pieces[rand]);
+        words+=genHelp(pieces[rand]);
     }
     pieces=line.split("\\s+");
     if(pieces.length>1){
-        Random random=new Random();
-        int rand=random.nextInt(pieces.length);
-        return genHelp(pieces[rand]);
+        for(String s: pieces){
+            if(s.contains("<")){
+                return genHelp(s);
+            }
+           words+=s+" ";
+        }
     }
 }
-return symbol.trim();
+else{
+    pieces=symbol.split("\\s+");
+    for(String s: pieces){
+        if(s.contains("<")){
+           words+=genHelp(s);
+        }
+      words+=s+" ";
+    }
+}
+return words.trim();
 }
 
 }
