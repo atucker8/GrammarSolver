@@ -3,6 +3,7 @@ public class GrammarSolver {
 private Map<String,String> rulesMap;
 private Set<String> keys;
 
+
 //constructor that splits rules into non-terminal and termnals and put them into a map
 public GrammarSolver(List<String> rules){
 if(rules.isEmpty()){
@@ -29,7 +30,7 @@ public String getSymbols(){
     for(String s: keys){
         symbols+=s+", ";
     }
-    symbols=symbols.substring(0,symbols.length()-1)+"]";
+    symbols=symbols.substring(0,symbols.length()-2)+"]";
     return symbols;
 }
 
@@ -56,15 +57,16 @@ if(line!=null){
         int rand=random.nextInt(pieces.length); 
         words+=genHelp(pieces[rand]);
     }
+    else{
     pieces=line.split("\\s+");
     if(pieces.length>1){
         for(String s: pieces){
             if(s.contains("<")){
-                return genHelp(s);
+                words+=genHelp(s);
             }
-           words+=s+" ";
         }
     }
+}
 }
 else{
     pieces=symbol.split("\\s+");
@@ -72,10 +74,12 @@ else{
         if(s.contains("<")){
            words+=genHelp(s);
         }
+        else{
       words+=s+" ";
+        }
     }
 }
-return words.trim();
+return words;
 }
 
 }
